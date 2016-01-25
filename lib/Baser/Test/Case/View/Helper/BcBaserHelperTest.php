@@ -468,6 +468,54 @@ class BcBaserHelperTest extends BaserTestCase {
 		);
 	}
 
+	/**
+	 * 現在のページがブログかどうかを判定する
+	 *
+	 * @param bool $expected 期待値
+	 * @param string $url リクエストURL
+	 * @param string $agent ユーザーエージェント
+	 *
+	 * @return void
+	 * @dataProvider isBlogDataProvider
+	 */
+	public function testIsBlog($expected, $url, $agent = null) {
+		$this->_unsetAgent();
+		if ($agent !== null) {
+			$this->_setAgent($agent);
+		}
+		$this->BcBaser->request = $this->_getRequest($url);
+		$this->assertEquals($expected, $this->BcBaser->isBlog());
+	}
+
+	public function isBlogDataProvider() {
+		return array(
+			//PC
+			array(false, '/'),
+			array(false, '/index'),
+			array(true, '/news/index'),
+			array(true, '/news/archives/1'),
+			array(true, '/news/archives/category/release'),
+
+			// モバイルページ
+			array(false, '/', 'mobile'),
+			array(false, '/s/', 'mobile'),
+			array(false, '/m/', 'mobile'),
+			array(false, '/m/index', 'mobile'),
+			array(true, '/m/news/index', 'mobile'),
+			array(true, '/m/news/archives/1', 'mobile'),
+			array(true, '/m/news/archives/category/release', 'mobile'),
+
+			// スマートフォンページ
+			array(false, '/', 'smartphone'),
+			array(false, '/m/', 'smartphone'),
+			array(false, '/s/', 'smartphone'),
+			array(false, '/s/index', 'smartphone'),
+			array(true, '/s/news/index', 'smartphone'),
+			array(true, '/s/news/archives/1', 'smartphone'),
+			array(true, '/s/news/archives/category/release', 'smartphone')
+		);
+	}
+
 /**
  * baserCMSが設置されているパスを出力する
  *
