@@ -406,14 +406,14 @@ class BcBaserHelper extends AppHelper {
 		}
 	}
 
-	/**
-	 * 現在のページがブログかどうかを判定する
-	 * pluginだけで良いのかもしれないけど、controllerもチェックしておく
-	 * blogとの固定文字列比較を本当はやめたいけど、定数やconfigにはいってないのでしかたなく
-	 * BlogHelper isSingle でも同様の比較をしてるので直すなら両方いっきになおす
-	 *
-	 * @return bool
-	 */
+/**
+ * 現在のページがブログかどうかを判定する
+ * pluginだけで良いのかもしれないけど、controllerもチェックしておく
+ * blogとの固定文字列比較を本当はやめたいけど、定数やconfigにはいってないのでしかたなく
+ * BlogHelper isSingle でも同様の比較をしてるので直すなら両方いっきになおす
+ *
+ * @return bool
+ */
 	public function isBlog() {
 
 		return (
