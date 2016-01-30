@@ -46,13 +46,27 @@
 		<td>全体</td>
 		<td>
 			<pre>
-				&lt;?php $this-BcBaser->allBlogPosts($option);?&gt;<br />
-				&lt;?php $this-ExBlog->allBlogPosts($option);?&gt; // Blog配下で利用可能(上記はこちらの alias )
+				&lt;?php $this-BcBaser->allBlogPosts($options);?&gt;
+				// Blog配下で利用可能(上記はこちらの alias )
+				&lt;?php $this-ExBlog->allBlogPosts($options);?&gt;
 			</pre>
 			様々な条件で、ブログの情報を取得します。(拡張途中・・・)<br />
-			$option['tag'] タグで絞り込む場合にタグIDを指定（初期値 : null）<br />
-			$option['content'] content.id(ブログのID) で絞り込む場合に id を指定（初期値 : null）<br />
-			$option['post'] post.id(ブログ記事のID) で絞り込む場合に id を指定（初期値 : null）<br />
+			$options['tag'] タグで絞り込む場合にタグIDを指定。複数の場合は配列で指定。（初期値 : null）<br />
+			$options['content'] content.id(ブログのID) で絞り込む場合に id を指定。複数の場合は配列で指定。（初期値 : null）<br />
+			$options['post'] post.id(ブログ記事のID) で絞り込む場合に id を指定。複数の場合は配列で指定。（初期値 : null）<br />
+			ex)
+			<pre>
+				&lt;?php
+				    // optionsは指定しなくてもOK
+				    $options = array(
+				        'tag' => array(5,3,1,2),// タグのID
+				        'content' => 3, // ブログのID
+				        'post' => array(1,2,3,4,5,6,7,8,9,10) // ブログ記事のID
+				    );
+				    $contents = $this->BcBaser->allBlogPosts($options);
+				    //該当の記事のデータが $contentsに配列で入っているのでゴニョゴニョする。
+				?&gt;<br />
+			</pre>
 		</td>
 	</tr>
 
