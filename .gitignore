@@ -5,7 +5,7 @@ app/Config/database.php
 app/Config/install.php
 app/db/*
 !app/db/empty
-app/Plugin/*
+#app/Plugin/*
 !app/Plugin/empty
 app/webroot/files/*
 !app/webroot/files/empty
