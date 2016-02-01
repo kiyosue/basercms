@@ -5,7 +5,8 @@
  *
  * @package ExHelper.View.Helper
  * @copyright		Copyright Since 2016 Kiyosue
- * @license			http://basercms.net/license/index.html
+ *
+ * @property ExBlog $ExBlog
  */
 
 
@@ -38,7 +39,16 @@ class ExHelperBaserHelper extends AppHelper {
 	 */
 	public function allBlogPosts($options = array()) {
 		return $this->ExBlog->allBlogPosts($options);
+	}
 
+	/**
+	 * 直前のallBlogPostsで、取得したデータに対してのpaginationを出力する
+	 *
+	 * @return array ページネーションのデータ
+	 *
+	 */
+	public function allBlogPagination() {
+		return $this->ExBlog->allBlogPagination();
 	}
 
 }

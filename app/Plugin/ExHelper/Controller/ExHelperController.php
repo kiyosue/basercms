@@ -8,14 +8,19 @@
 
 // BcPluginAppControllerを継承する前の準備
 App::uses('BcPluginAppController', 'Controller');
+App::uses('ExHelperAppController', 'ExHelper.Controller');
+App::uses('BlogPost', 'Blog.Model');
 
-class ExHelperController extends BcPluginAppController {
+class ExHelperController extends ExHelperAppController {
 
 	public $name = 'ExHelper';
 
-	// 管理画面接続時にログイン認証を行う設定
-	public $components = array('BcAuth', 'Cookie', 'BcAuthConfigure');
+	public $uses = array('Blog.BlogPost', 'ExHelper.ExHelper');
 
+	// 管理画面接続時にログイン認証を行う設定
+	public $components = array('BcAuth', 'Cookie', 'BcAuthConfigure', 'Paginator');
+
+	public $paginate = null;
 
 	public function beforeFilter() {
 		parent::beforeFilter();

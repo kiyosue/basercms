@@ -7,11 +7,22 @@
  * @package ExHelper.View.Helper
  *
  * @property BlogPost $BlogPost
+ * @property BcBaser $BcBaser
+ * @property ExHelper $ExHelper
  */
 
 App::uses('BlogHelper', 'Blog.View/Helper');
+App::uses('ComponentCollection', 'Controller');
+App::uses('PaginatorComponent', 'Controller/Component');
+App::uses('ExHelperController', 'ExHelper.Controller');
+App::uses('ExHelper', 'ExHelper.Model');
+
 
 class ExBlogHelper extends BlogHelper {
+
+	var $allBlogPagination = null;
+
+	public $helpers = array('Html', 'BcTime', 'BcBaser', 'BcUpload', 'BcBaser');
 
 	/**
 	 * コンストラクタ
@@ -129,11 +140,41 @@ class ExBlogHelper extends BlogHelper {
 			),
 			'conditions' => $conditions,
 			'order' => array('BlogPost.posts_date DESC'), //公開日順にソート
-			'limit' => 1000, //取得記事数
+			'limit' => 100, //取得記事数
 			'cache' => false //キャッシュはオフに
 		));
 
+		//pagination用セッティング
+		$settings =  array(
+			'page' => 1,
+			'limit' => 2,
+			'maxLimit' => 100,
+			'paramType' => 'querystring'
+		);
+
+		$ExHelperController = new ExHelperController();
+//		var_dump($this->request);exit;
+		$ExHelperController->request = $this->request; //pagination componentで使っているため
+		$ExHelperController->request->params['controller'] = substr($this->BcBaser->getUrl(),1);
+		$ExHelperController->request->params['action'] = null;
+
+		$ComponentCollection = new ComponentCollection();
+		$ComponentCollection->init($ExHelperController); //利用するControllerをセットしてあげる。
+		$this->Paginator = new PaginatorComponent($ComponentCollection, $settings);
+
+		$posts = $this->Paginator->paginate('BlogPost', $conditions);
+
+		// 出力関数しかないので一回制御
+		ob_start();
+		$this->BcBaser->pagination();
+		$this->allBlogPagination = ob_get_contents();
+		ob_end_clean();
 
 		return $posts ;
+	}
+
+
+	public function allBlogPagination(){
+		return $this->allBlogPagination ;
 	}
 }
