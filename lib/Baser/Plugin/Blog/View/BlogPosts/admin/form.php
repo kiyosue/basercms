@@ -19,6 +19,9 @@ $this->BcBaser->link('&nbsp;', array('controller' => 'blog', 'action' => 'previe
 $this->BcBaser->js('Blog.admin/blog_posts/form', false, array('id' => 'AdminBlogBLogPostsEditScript',
 	'data-fullurl' => $this->BcContents->getUrl($this->request->params['Content']['url'] . '/archives/' . $this->BcForm->value('BlogPost.no'), true, $this->request->params['Site']['use_subdomain'])
 ));
+if( !empty($this->BcBaser->siteConfig['alert_dialog']) ) {
+	$this->BcBaser->js('admin/alert_dialog', false, ['id' => 'AdminAlertDialog']);
+}
 ?>
 
 
@@ -185,7 +188,7 @@ $this->BcBaser->js('Blog.admin/blog_posts/form', false, array('id' => 'AdminBlog
 	<?php elseif ($this->action == 'admin_edit'): ?>
 		<?php echo $this->BcForm->submit('保存', array('div' => false, 'class' => 'button', 'id' => 'BtnSave')) ?>
 		<?php echo $this->BcForm->button('プレビュー', array('div' => false, 'class' => 'button', 'id' => 'BtnPreview')) ?>
-		<?php $this->BcBaser->link('削除', array('action' => 'delete', $blogContent['BlogContent']['id'], $this->BcForm->value('BlogPost.id')), array('class' => 'button'), sprintf('%s を本当に削除してもいいですか？\n※ ブログ記事はゴミ箱に入らず完全に消去されます。', $this->BcForm->value('BlogPost.name')), false); ?>
+		<?php $this->BcBaser->link('削除', array('action' => 'delete', $blogContent['BlogContent']['id'], $this->BcForm->value('BlogPost.id')), array('class' => 'button'), sprintf("%s を本当に削除してもいいですか？\n※ ブログ記事はゴミ箱に入らず完全に消去されます。", $this->BcForm->value('BlogPost.name')), false); ?>
 	<?php endif ?>
 </div>
 

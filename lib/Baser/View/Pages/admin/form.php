@@ -15,6 +15,9 @@
  */
 $this->BcBaser->css('admin/ckeditor/editor', array('inline' => true));
 $this->BcBaser->js('admin/pages/edit', false);
+if( !empty($this->BcBaser->siteConfig['alert_dialog']) ){
+	$this->BcBaser->js('admin/alert_dialog', false, array('id' => 'AdminAlertDialog'));
+}
 $this->BcBaser->link('&nbsp;', array('action' => 'preview', $previewId), array('style' => 'display:none', 'id' => 'LinkPreview'));
 ?>
 
