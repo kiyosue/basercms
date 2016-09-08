@@ -213,6 +213,16 @@ $this->BcBaser->js('admin/site_configs/form', false, array('id' => 'AdminSiteCon
 					※ インストールモードはbaserCMSを初期化する場合にしか利用しませんので普段は利用しないようにしてください。</div>
 			</td>
 		</tr>
+
+		<tr>
+			<th class="col-head"><?php echo $this->BcForm->label('SiteConfig.alert_dialog', '編集中の画面遷移の警告') ?></th>
+			<td class="col-input">
+				<?php echo $this->BcForm->input('SiteConfig.alert_dialog', array('type' => 'radio', 'options' => $this->BcText->booleanDoList('利用'))) ?>
+				<?php echo $this->Html->image('admin/icn_help.png', array('class' => 'btn help', 'alt' => 'ヘルプ')) ?>
+				<div class="helptext">固定ページやブログ記事の編集画面で、未保存時な編集中に画面遷移をした時に警告ダイアログを表示するかどうかを設定します。</div>
+				<?php echo $this->BcForm->error('SiteConfig.alert_dialog') ?>
+			</td>
+		</tr>
 	</table>
 
 	<h2>エディタ設定関連</h2>
