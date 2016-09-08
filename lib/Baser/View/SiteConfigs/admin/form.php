@@ -215,7 +215,7 @@ $this->BcBaser->js('admin/site_configs/form', false, array('id' => 'AdminSiteCon
 		</tr>
 
 		<tr>
-			<th class="col-head"><?php echo $this->BcForm->label('SiteConfig.alert_dialog', '画面遷移警告ダイアログ') ?></th>
+			<th class="col-head"><?php echo $this->BcForm->label('SiteConfig.alert_dialog', '編集中の画面遷移の警告') ?></th>
 			<td class="col-input">
 				<?php echo $this->BcForm->input('SiteConfig.alert_dialog', array('type' => 'radio', 'options' => $this->BcText->booleanDoList('利用'))) ?>
 				<?php echo $this->Html->image('admin/icn_help.png', array('class' => 'btn help', 'alt' => 'ヘルプ')) ?>
